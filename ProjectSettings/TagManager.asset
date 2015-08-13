@@ -3,7 +3,13 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - HealthText
+  - AmmoText
+  - HealthBar
+  - AmmoBar
+  - ScoreText
+  - GunBarrelEnd
   layers:
   - Default
   - TransparentFX
