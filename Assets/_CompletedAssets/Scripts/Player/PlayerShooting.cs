@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using UnitySampleAssets.CrossPlatformInput;
 
 namespace CompleteProject
@@ -10,7 +11,7 @@ namespace CompleteProject
         public int damagePerShot = 20;                  // The damage inflicted by each bullet.
         public float timeBetweenBullets = 0.15f;        // The time between each shot.
         public float range = 100f;                      // The distance the gun can fire.
-
+        public Slider ammoSlider;
 
         float timer;                                    // A timer to determine when to fire.
         Ray shootRay;                                   // A ray from the gun end forwards.
@@ -22,7 +23,7 @@ namespace CompleteProject
         Light gunLight;                                 // Reference to the light component.
 		public Light faceLight;								// Duh
         float effectsDisplayTime = 0.2f;                // The proportion of the timeBetweenBullets that the effects will display for.
-
+        
 
         void Awake ()
         {
@@ -52,6 +53,7 @@ namespace CompleteProject
                 {
                     Shoot();
                     currentAmmo--;
+                    ammoSlider.value = currentAmmo;
                 }
             }
 #else
@@ -90,6 +92,7 @@ namespace CompleteProject
                 currentAmmo += amount;
             }
             audioSource[1].Play();
+            ammoSlider.value = currentAmmo;
         }
 
         void Shoot ()
