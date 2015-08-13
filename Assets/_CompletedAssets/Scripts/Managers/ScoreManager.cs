@@ -15,7 +15,7 @@ namespace CompleteProject
         void Awake ()
         {
             // Set up the reference.
-            text = GetComponent <Text> ();
+            text = GameObject.Find("/HUDCanvas/ScoreText").GetComponent <Text> ();
 
             // Reset the score.
             score = 0;
