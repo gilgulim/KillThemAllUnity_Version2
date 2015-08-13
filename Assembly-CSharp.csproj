@@ -57,6 +57,7 @@
      <Compile Include="Assets\_CompletedAssets\SampleAssets\Effects\ImageEffects\Scripts\ScreenSpaceAmbientOcclusion.cs" />
      <Compile Include="Assets\_CompletedAssets\SampleAssets\Effects\ImageEffects\Scripts\TiltShift.cs" />
      <Compile Include="Assets\_CompletedAssets\SampleAssets\Effects\ImageEffects\Scripts\VignetteAndChromaticAberration.cs" />
+     <Compile Include="Assets\_CompletedAssets\Scripts\Artifacts\AmmoCollected.cs" />
      <Compile Include="Assets\_CompletedAssets\Scripts\Artifacts\HealthCollected.cs" />
      <Compile Include="Assets\_CompletedAssets\Scripts\Audio\MixLevels.cs" />
      <Compile Include="Assets\_CompletedAssets\Scripts\Camera\CameraFollow.cs" />

@@ -1,14 +1,17 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using UnitySampleAssets.CrossPlatformInput;
 
 namespace CompleteProject
 {
     public class PlayerShooting : MonoBehaviour
     {
+        public const int MAX_AMMO = 200;
+        public int currentAmmo = MAX_AMMO;
         public int damagePerShot = 20;                  // The damage inflicted by each bullet.
         public float timeBetweenBullets = 0.15f;        // The time between each shot.
         public float range = 100f;                      // The distance the gun can fire.
-
+        public Slider ammoSlider;
 
         float timer;                                    // A timer to determine when to fire.
         Ray shootRay;                                   // A ray from the gun end forwards.
@@ -16,11 +19,11 @@ namespace CompleteProject
         int shootableMask;                              // A layer mask so the raycast only hits things on the shootable layer.
         ParticleSystem gunParticles;                    // Reference to the particle system.
         LineRenderer gunLine;                           // Reference to the line renderer.
-        AudioSource gunAudio;                           // Reference to the audio source.
+        AudioSource[] audioSource;                           // Reference to the audio source.
         Light gunLight;                                 // Reference to the light component.
 		public Light faceLight;								// Duh
         float effectsDisplayTime = 0.2f;                // The proportion of the timeBetweenBullets that the effects will display for.
-
+        
 
         void Awake ()
         {
@@ -30,7 +33,7 @@ namespace CompleteProject
             // Set up the references.
             gunParticles = GetComponent<ParticleSystem> ();
             gunLine = GetComponent <LineRenderer> ();
-            gunAudio = GetComponent<AudioSource> ();
+            audioSource = GetComponents<AudioSource>();
             gunLight = GetComponent<Light> ();
 			//faceLight = GetComponentInChildren<Light> ();
         }
@@ -46,7 +49,12 @@ namespace CompleteProject
 			if(Input.GetButton ("Fire1") && timer >= timeBetweenBullets && Time.timeScale != 0)
             {
                 // ... shoot the gun.
-                Shoot ();
+                if (currentAmmo > 0)
+                {
+                    Shoot();
+                    currentAmmo--;
+                    ammoSlider.value = currentAmmo;
+                }
             }
 #else
             // If there is input on the shoot direction stick and it's time to fire...
@@ -73,6 +81,19 @@ namespace CompleteProject
             gunLight.enabled = false;
         }
 
+        public void AddAmmo(int amount)
+        {
+            if(currentAmmo + amount > MAX_AMMO)
+            {
+                currentAmmo = MAX_AMMO;
+            }
+            else
+            {
+                currentAmmo += amount;
+            }
+            audioSource[1].Play();
+            ammoSlider.value = currentAmmo;
+        }
 
         void Shoot ()
         {
@@ -80,7 +101,7 @@ namespace CompleteProject
             timer = 0f;
 
             // Play the gun shot audioclip.
-            gunAudio.Play ();
+            audioSource[0].Play();
 
             // Enable the lights.
             gunLight.enabled = true;
