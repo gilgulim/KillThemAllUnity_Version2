@@ -10,6 +10,9 @@ TagManager:
   - AmmoBar
   - ScoreText
   - GunBarrelEnd
+  - SF_Door
+  - SF_Door1
+  - New Tag
   layers:
   - Default
   - TransparentFX
