@@ -4,6 +4,7 @@ namespace CompleteProject
 {
     public class EnemyManager : MonoBehaviour
     {
+        public Transform playerTransform;
         public PlayerHealth playerHealth;       // Reference to the player's heatlh.
         public GameObject enemy;                // The enemy prefab to be spawned.
         public float spawnTime = 3f;            // How long between each spawn.
@@ -19,6 +20,7 @@ namespace CompleteProject
 
         void Spawn ()
         {
+
             // If the player has no health left...
             if(playerHealth.currentHealth <= 0f)
             {
@@ -30,7 +32,19 @@ namespace CompleteProject
             int spawnPointIndex = Random.Range (0, spawnPoints.Length);
 
             // Create an instance of the enemy prefab at the randomly selected spawn point's position and rotation.
-            Instantiate (enemy, spawnPoints[spawnPointIndex].position, spawnPoints[spawnPointIndex].rotation);
+            GameObject enemyObject =  Instantiate (enemy, spawnPoints[spawnPointIndex].position, spawnPoints[spawnPointIndex].rotation) as GameObject;
+            if (enemyObject != null)
+            {
+                EnemyMovement enemyMovement = enemyObject.GetComponent<EnemyMovement>();
+                if (enemyMovement != null)
+                {
+                    enemyMovement.playerHealth = playerHealth;
+                    enemyMovement.player = playerTransform;
+
+                    Debug.Log("Set enemy movment properties!");
+                }
+            }
+
         }
     }
 }

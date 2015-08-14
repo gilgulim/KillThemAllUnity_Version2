@@ -34,7 +34,10 @@ namespace CompleteProject
         {
             // Setting up the references.
             player = GameObject.FindGameObjectWithTag("Player");
-            playerShooting = player.GetComponentInChildren<PlayerShooting>();
+            if (player != null)
+            {
+                playerShooting = player.GetComponentInChildren<PlayerShooting>();
+            }
         }
             
     }

@@ -34,7 +34,10 @@ namespace CompleteProject
         {
             // Setting up the references.
             player = GameObject.FindGameObjectWithTag("Player");
-            playerHealth = player.GetComponent<PlayerHealth>();
+            if (player != null)
+            {
+                playerHealth = player.GetComponent<PlayerHealth>();
+            }
         }
 
     }
