@@ -7,7 +7,7 @@ namespace CompleteProject
     {
         public float speed = 6f;            // The speed that the player will move at.
 
-
+        NetworkView netView;
         Vector3 movement;                   // The vector to store the direction of the player's movement.
         Animator anim;                      // Reference to the animator component.
         Rigidbody playerRigidbody;          // Reference to the player's rigidbody.
@@ -26,23 +26,29 @@ namespace CompleteProject
             // Set up references.
             anim = GetComponent <Animator> ();
             playerRigidbody = GetComponent <Rigidbody> ();
+
+            netView = GetComponent<NetworkView>();
         }
 
 
         void FixedUpdate ()
         {
-            // Store the input axes.
-            float h = CrossPlatformInputManager.GetAxisRaw("Horizontal");
-            float v = CrossPlatformInputManager.GetAxisRaw("Vertical");
+            if (netView.isMine)
+            {
 
-            // Move the player around the scene.
-            Move (h, v);
+                // Store the input axes.
+                float h = CrossPlatformInputManager.GetAxisRaw("Horizontal");
+                float v = CrossPlatformInputManager.GetAxisRaw("Vertical");
 
-            // Turn the player to face the mouse cursor.
-            Turning ();
+                // Move the player around the scene.
+                Move(h, v);
 
-            // Animate the player.
-            Animating (h, v);
+                // Turn the player to face the mouse cursor.
+                Turning();
+
+                // Animate the player.
+                Animating(h, v);
+            }
         }
 
 
