@@ -75,6 +75,7 @@
      <Compile Include="Assets\_CompletedAssets\Scripts\Managers\PauseManager.cs" />
      <Compile Include="Assets\_CompletedAssets\Scripts\Managers\ScoreManager.cs" />
      <Compile Include="Assets\_CompletedAssets\Scripts\Menu\MainMenu.cs" />
+     <Compile Include="Assets\_CompletedAssets\Scripts\Menu\SelectServer.cs" />
      <Compile Include="Assets\_CompletedAssets\Scripts\Player\PlayerHealth.cs" />
      <Compile Include="Assets\_CompletedAssets\Scripts\Player\PlayerMovement.cs" />
      <Compile Include="Assets\_CompletedAssets\Scripts\Player\PlayerShooting.cs" />

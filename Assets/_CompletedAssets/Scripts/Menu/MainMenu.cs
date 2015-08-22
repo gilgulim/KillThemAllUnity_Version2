@@ -8,8 +8,9 @@ namespace CompleteProject
     {
 
         #region Consts
-        private const string typeName = "KillThemAll";
-        private const string gameName = "KillThemAllRoom";
+        private const string TYPE_NAME = "KillThemAll";
+        private const string GAME_NAME = "KillThemAllRoom";
+        private const string LOCAL_HOST_IP = "127.0.0.1";
         #endregion
 
         #region Private Members
@@ -30,12 +31,31 @@ namespace CompleteProject
         public Slider ammoSlider;
         #endregion
 
+        void Start()
+        {
+
+        }
+
         #region UI Actions
         public void StartServer()
         {
-            MasterServer.ipAddress = "127.0.0.1";
+
+            if(!SelectServer.UsingUnityServer)
+            {
+                if (IsValidIPAddress(SelectServer.RemoteServerIP))
+                {
+                    MasterServer.ipAddress = SelectServer.RemoteServerIP;
+                }
+                else
+                {
+                    MasterServer.ipAddress = LOCAL_HOST_IP;
+                }
+            }
+
+            Debug.Log("Chosen IP: "  + MasterServer.ipAddress);
+
             Network.InitializeServer(4, 25000, !Network.HavePublicAddress());
-            MasterServer.RegisterHost(typeName, gameName);
+            MasterServer.RegisterHost(TYPE_NAME, GAME_NAME);
 
             btnJoinServer.enabled = false;
             btnExit.enabled = false;
@@ -43,8 +63,19 @@ namespace CompleteProject
 
         public void JoinServer()
         {
-            MasterServer.ipAddress = "127.0.0.1";
-            MasterServer.RequestHostList(typeName);
+            if (!SelectServer.UsingUnityServer)
+            {
+                if (IsValidIPAddress(SelectServer.RemoteServerIP))
+                {
+                    MasterServer.ipAddress = SelectServer.RemoteServerIP;
+                }
+                else 
+                {
+                    MasterServer.ipAddress = LOCAL_HOST_IP;
+                }
+            }
+
+            MasterServer.RequestHostList(TYPE_NAME);
             btnJoinServer.enabled = false;
             btnExit.enabled = false;
             btnStartServer.enabled = false;
@@ -162,6 +193,30 @@ namespace CompleteProject
 
 
         
+        }
+        private bool IsValidIPAddress(string ipAddress)
+        {
+            string[] octets = ipAddress.Split('.');
+            if (octets!= null && octets.Length == 4)
+            {
+                foreach (string octet in octets)
+                {
+                    try
+                    {
+                        int octetNum = int.Parse(octet);
+                        if (octetNum < 0 || octetNum > 255)
+                        {
+                            return false;
+                        }
+                    }
+                    catch (UnityException)
+                    {
+                        return false;
+                    }
+
+                }
+            }
+            return true;
         }
         #endregion
     }
