@@ -91,7 +91,7 @@ namespace CompleteProject
             }
             
             healthSlider.value = currentHealth;
-            playerAudio[1].Play();
+            playerAudio[0].Play();
 
         }
 

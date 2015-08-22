@@ -20,6 +20,11 @@ namespace CompleteProject
 
         void Spawn ()
         {
+            //If player has not been initialized yet
+            if (playerHealth == null || playerTransform == null)
+            {
+                return;
+            }
 
             // If the player has no health left...
             if(playerHealth.currentHealth <= 0f)
@@ -32,7 +37,9 @@ namespace CompleteProject
             int spawnPointIndex = Random.Range (0, spawnPoints.Length);
 
             // Create an instance of the enemy prefab at the randomly selected spawn point's position and rotation.
-            GameObject enemyObject =  Instantiate (enemy, spawnPoints[spawnPointIndex].position, spawnPoints[spawnPointIndex].rotation) as GameObject;
+
+            GameObject enemyObject = Network.Instantiate(enemy, spawnPoints[spawnPointIndex].position, spawnPoints[spawnPointIndex].rotation, 0) as GameObject;
+            //GameObject enemyObject =  Instantiate (enemy, spawnPoints[spawnPointIndex].position, spawnPoints[spawnPointIndex].rotation) as GameObject;
             if (enemyObject != null)
             {
                 EnemyMovement enemyMovement = enemyObject.GetComponent<EnemyMovement>();
@@ -40,8 +47,6 @@ namespace CompleteProject
                 {
                     enemyMovement.playerHealth = playerHealth;
                     enemyMovement.player = playerTransform;
-
-                    Debug.Log("Set enemy movment properties!");
                 }
             }
 

@@ -34,6 +34,7 @@ GameObject:
   - 114: {fileID: 11400000}
   - 82: {fileID: 8200000}
   - 114: {fileID: 11400006}
+  - 148: {fileID: 14831664}
   m_Layer: 9
   m_Name: ZomBunny
   m_TagString: Untagged
@@ -300,6 +301,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ea9a6ed18654d14db02bf0076cfe488, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 0}
+  playerHealth: {fileID: 0}
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -401,6 +404,18 @@ SkinnedMeshRenderer:
     m_Center: {x: -.753364086, y: .141817361, z: .0847388208}
     m_Extent: {x: .927978992, y: .801833868, z: .54079175}
   m_DirtyAABB: 0
+--- !u!148 &14831664
+NetworkView:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100002}
+  m_Enabled: 1
+  m_StateSynchronization: 1
+  m_Observed: {fileID: 400002}
+  m_ViewID:
+    m_ID: 0
+    m_Type: 0
 --- !u!195 &19500000
 NavMeshAgent:
   m_ObjectHideFlags: 1

@@ -46,6 +46,7 @@ GameObject:
   - 120: {fileID: 12000000}
   - 114: {fileID: 11400000}
   - 108: {fileID: 10800000}
+  - 148: {fileID: 14808828}
   m_Layer: 0
   m_Name: GunBarrelEnd
   m_TagString: Untagged
@@ -557,6 +558,18 @@ SkinnedMeshRenderer:
     m_Center: {x: -.217404559, y: -9.68575478e-08, z: .106329679}
     m_Extent: {x: .709815681, y: .0443865508, z: .323496759}
   m_DirtyAABB: 0
+--- !u!148 &14808828
+NetworkView:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100004}
+  m_Enabled: 1
+  m_StateSynchronization: 1
+  m_Observed: {fileID: 400004}
+  m_ViewID:
+    m_ID: 0
+    m_Type: 0
 --- !u!148 &14848316
 NetworkView:
   m_ObjectHideFlags: 1

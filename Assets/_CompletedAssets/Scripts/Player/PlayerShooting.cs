@@ -23,10 +23,14 @@ namespace CompleteProject
         Light gunLight;                                 // Reference to the light component.
 		public Light faceLight;								// Duh
         float effectsDisplayTime = 0.2f;                // The proportion of the timeBetweenBullets that the effects will display for.
+        NetworkView netView;
+
+
         
 
         void Awake ()
         {
+        
             // Create a layer mask for the Shootable layer.
             shootableMask = LayerMask.GetMask ("Shootable");
 
@@ -35,7 +39,13 @@ namespace CompleteProject
             gunLine = GetComponent <LineRenderer> ();
             audioSource = GetComponents<AudioSource>();
             gunLight = GetComponent<Light> ();
-			//faceLight = GetComponentInChildren<Light> ();
+		
+            // Get the netwoek view
+            netView = GetComponentInParent<NetworkView>();
+            if (netView == null)
+            {
+                Debug.Log("Network view is nulllll");
+            }
         }
 
 
@@ -44,9 +54,8 @@ namespace CompleteProject
             // Add the time since Update was last called to the timer.
             timer += Time.deltaTime;
 
-#if !MOBILE_INPUT
             // If the Fire1 button is being press and it's time to fire...
-			if(Input.GetButton ("Fire1") && timer >= timeBetweenBullets && Time.timeScale != 0)
+			if(netView.isMine && Input.GetButton ("Fire1") && timer >= timeBetweenBullets && Time.timeScale != 0)
             {
                 // ... shoot the gun.
                 if (currentAmmo > 0)
@@ -56,14 +65,7 @@ namespace CompleteProject
                     ammoSlider.value = currentAmmo;
                 }
             }
-#else
-            // If there is input on the shoot direction stick and it's time to fire...
-            if ((CrossPlatformInputManager.GetAxisRaw("Mouse X") != 0 || CrossPlatformInputManager.GetAxisRaw("Mouse Y") != 0) && timer >= timeBetweenBullets)
-            {
-                // ... shoot the gun
-                Shoot();
-            }
-#endif
+
             // If the timer has exceeded the proportion of timeBetweenBullets that the effects should be displayed for...
             if(timer >= timeBetweenBullets * effectsDisplayTime)
             {
@@ -91,7 +93,7 @@ namespace CompleteProject
             {
                 currentAmmo += amount;
             }
-            audioSource[1].Play();
+            audioSource[0].Play();
             ammoSlider.value = currentAmmo;
         }
 
