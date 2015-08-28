@@ -67,17 +67,25 @@ namespace CompleteProject
 
         public void JoinServer()
         {
+            string ipAddress = string.Empty;
+
             if (!SelectServer.UsingUnityServer)
             {
                 if (IsValidIPAddress(SelectServer.RemoteServerIP))
                 {
-                    MasterServer.ipAddress = SelectServer.RemoteServerIP;
+                    ipAddress = SelectServer.RemoteServerIP;
                 }
-                else 
+                else
                 {
-                    MasterServer.ipAddress = LOCAL_HOST_IP;
+                    ipAddress = LOCAL_HOST_IP;
                 }
             }
+
+            MasterServer.ipAddress = ipAddress;
+            MasterServer.port = 23466;
+            Network.natFacilitatorIP = ipAddress;
+            Network.natFacilitatorPort = 50005;
+
 
             MasterServer.RequestHostList(TYPE_NAME);
             btnJoinServer.enabled = false;
@@ -107,6 +115,7 @@ namespace CompleteProject
                 hostList = MasterServer.PollHostList();
                 if (hostList != null && hostList.Length > 0)
                 {
+                    Debug.Log(hostList[0]);
                     Network.Connect(hostList[0]);
                 }
                 else
