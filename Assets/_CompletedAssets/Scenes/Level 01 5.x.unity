@@ -6187,7 +6187,6 @@ MonoBehaviour:
   damageImage: {fileID: 1394906873}
   healthSlider: {fileID: 1837071937}
   ammoSlider: {fileID: 196870415}
-  serverSelector: {fileID: 1432846570}
 --- !u!114 &1456643060
 MonoBehaviour:
   m_ObjectHideFlags: 0

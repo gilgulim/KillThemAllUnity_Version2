@@ -39,20 +39,24 @@ namespace CompleteProject
         #region UI Actions
         public void StartServer()
         {
+            string ipAddress = string.Empty;
 
             if(!SelectServer.UsingUnityServer)
             {
                 if (IsValidIPAddress(SelectServer.RemoteServerIP))
                 {
-                    MasterServer.ipAddress = SelectServer.RemoteServerIP;
+                    ipAddress = SelectServer.RemoteServerIP;
                 }
                 else
                 {
-                    MasterServer.ipAddress = LOCAL_HOST_IP;
+                    ipAddress = LOCAL_HOST_IP;
                 }
             }
 
-            Debug.Log("Chosen IP: "  + MasterServer.ipAddress);
+            MasterServer.ipAddress = ipAddress;
+            MasterServer.port = 23466;
+            Network.natFacilitatorIP = ipAddress;
+            Network.natFacilitatorPort = 50005;
 
             Network.InitializeServer(4, 25000, !Network.HavePublicAddress());
             MasterServer.RegisterHost(TYPE_NAME, GAME_NAME);
