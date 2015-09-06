@@ -7,8 +7,6 @@ namespace CompleteProject
     public class ScoreManager : MonoBehaviour
     {
         public static int score;        // The player's score.
-
-
         Text text;                      // Reference to the Text component.
 
 

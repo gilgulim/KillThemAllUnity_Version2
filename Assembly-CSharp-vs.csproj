@@ -58,6 +58,7 @@
      <Compile Include="Assets\Assets\Scripts\Helpers\RandomParticlePoint.cs" />
      <Compile Include="Assets\Assets\Scripts\Helpers\VolumeHandler.cs" />
      <Compile Include="Assets\Assets\Scripts\Managers\EnemyManager.cs" />
+     <Compile Include="Assets\Assets\Scripts\Managers\GameFinishedManager.cs" />
      <Compile Include="Assets\Assets\Scripts\Managers\GameOverManager.cs" />
      <Compile Include="Assets\Assets\Scripts\Managers\PauseManager.cs" />
      <Compile Include="Assets\Assets\Scripts\Managers\ScoreManager.cs" />

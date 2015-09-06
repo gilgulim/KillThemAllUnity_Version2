@@ -18,9 +18,9 @@ namespace CompleteProject
         int shootableMask;                              // A layer mask so the raycast only hits things on the shootable layer.
         ParticleSystem gunParticles;                    // Reference to the particle system.
         LineRenderer gunLine;                           // Reference to the line renderer.
-        AudioSource[] audioSource;                           // Reference to the audio source.
+        AudioSource[] audioSource;              
         Light gunLight;                                 // Reference to the light component.
-		public Light faceLight;								// Duh
+		public Light faceLight;					
         float effectsDisplayTime = 0.2f;                // The proportion of the timeBetweenBullets that the effects will display for.
         NetworkView netView;
 
@@ -39,7 +39,7 @@ namespace CompleteProject
             audioSource = GetComponents<AudioSource>();
             gunLight = GetComponent<Light> ();
 		
-            // Get the netwoek view
+            // Get the network view
             netView = GetComponentInParent<NetworkView>();
         }
 

@@ -116,8 +116,6 @@ namespace CompleteProject
             // Turn off the movement and shooting scripts.
             playerMovement.enabled = false;
             playerShooting.enabled = false;
-
-            //Destroy(gameObject);
         }
 
 

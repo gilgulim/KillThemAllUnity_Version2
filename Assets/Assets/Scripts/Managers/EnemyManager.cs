@@ -7,7 +7,8 @@ namespace CompleteProject
         public Transform playerTransform;
         public PlayerHealth playerHealth;     
         public GameObject enemy;              
-        public float spawnTime = 3f;          
+        public float spawnTime = 3f;
+        public int spawnCount; 
         public Transform[] spawnPoints;       
 
 
@@ -20,6 +21,11 @@ namespace CompleteProject
 
         void Spawn ()
         {
+            if (spawnCount == 0)
+            {
+                return;
+            }
+
             //If player has not been initialized yet
             if (playerHealth == null || playerTransform == null)
             {
@@ -46,8 +52,12 @@ namespace CompleteProject
                 {
                     enemyMovement.playerHealth = playerHealth;
                     enemyMovement.player = playerTransform;
+
+                    spawnCount--;
                 }
             }
+
+                
 
         }
     }
